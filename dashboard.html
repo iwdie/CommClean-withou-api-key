@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanMap - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+    
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #bcc5ee 0%, #a7cfb1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .actions-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            border-color: #2ecc71;
+        }
+
+        .add-spot-card {
+            background: linear-gradient(135deg, rgba(3, 86, 39, 0.1), rgba(7, 158, 67, 0.496));
+        }
+
+        .join-spot-card {
+            background: linear-gradient(135deg, rgba(18, 81, 123, 0.1), rgba(41, 127, 185, 0.508));
+        }
+
+        .card-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .card-description {
+            color: #fcfcfc;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .card-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .join-spot-card .card-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .card-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .join-spot-card .card-button:hover {
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .recent-activity {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+        }
+
+        .activity-icon {
+            font-size: 1.5em;
+        }
+
+        .activity-text {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .actions-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .welcome-section, .action-card, .recent-activity {
+                padding: 25px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🗺️ CleanMap</div>
+        <div class="user-info">
+            <span id="userName">Welcome back!</span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="welcome-section">
+            <h1 class="welcome-title">Ready to Clean Up? 🌱</h1>
+            <p class="welcome-subtitle">Join our community effort to make the world cleaner, one spot at a time.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Active Spots</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">128</div>
+                    <div class="stat-label">Volunteers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Cleaned This Week</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="actions-section">
+            <div class="action-card add-spot-card" onclick="goToAddSpot()">
+                <div class="card-icon">📍</div>
+                <h2 class="card-title">Add a Spot</h2>
+                <p class="card-description">Found a place that needs cleaning? Mark it on the map and let others know about it.</p>
+                <button class="card-button">Mark New Spot</button>
+            </div>
+
+            <div class="action-card join-spot-card" onclick="goToJoinSpot()">
+                <div class="card-icon">🤝</div>
+                <h2 class="card-title">Join a Cleanup</h2>
+                <p class="card-description">See spots marked by others and join community cleanup efforts in your area.</p>
+                <button class="card-button">Find Spots to Join</button>
+            </div>
+        </section>
+
+        <section class="recent-activity">
+            <h3 class="section-title">Recent Activity[For DEMO]</h3>
+            
+            <div class="activity-item">
+                <div class="activity-icon">🎉</div>
+                <div class="activity-text">Central Park playground was successfully cleaned by 8 volunteers!</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">📍</div>
+                <div class="activity-text">New spot added: Beach Road - needs 5 more volunteers</div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">👥</div>
+                <div class="activity-text">3 new volunteers joined the Downtown cleanup effort</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        
+        function checkAuth() {
+  
+            console.log('User authenticated');
+        }
+
+        function goToAddSpot() {
+            window.location.href = 'add-spot.html';
+        }
+
+        function goToJoinSpot() {
+            window.location.href = 'join-spot.html';
+        }
+
+        function logout() {
+           
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        
+        checkAuth();
+    </script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

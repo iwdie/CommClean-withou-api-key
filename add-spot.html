@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanMap - Add Spot</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .map-container {
+            height: 400px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+        }
+        
+        .back-btn {
+            background: #e9ecef;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn:hover {
+            background: #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🗺️ CleanMap</div>
+        <div class="user-info">
+            <span id="userName">Add New Spot</span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back to Dashboard</button>
+        
+        <div class="map-container" id="map"></div>
+        
+        <div class="form-container">
+            <form id="spot-form">
+                <div class="form-group">
+                    <label for="title">Spot Title</label>
+                    <input type="text" id="title" placeholder="e.g. Beach Cleanup Needed" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Describe the area and what needs to be cleaned..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="severity">Trash Severity</label>
+                    <select id="severity" required>
+                        <option value="">Select severity</option>
+                        <option value="low">Low - Some scattered trash</option>
+                        <option value="medium">Medium - Several piles of trash</option>
+                        <option value="high">High - Large amounts of trash</option>
+                    </select>
+                </div>
+                
+                <input type="hidden" id="latitude">
+                <input type="hidden" id="longitude">
+                
+                <button type="submit" class="submit-btn">Submit Spot</button>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    
+    <script type="module" src="./js/add-spot.js"></script>
+   
+    
+</body>
+</html>
